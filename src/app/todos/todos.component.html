@@ -1,0 +1,34 @@
+<div class="todos-list">
+    <clr-datagrid>
+        <clr-dg-column>Todos</clr-dg-column>
+
+        <clr-dg-row *ngFor="let todo of todos">
+            <clr-dg-cell>
+                <div class="row">
+                    <div class="col-sm-9 text-center">
+                        <s *ngIf="todo.completed">{{todo.title}}</s>
+                        <span *ngIf="!todo.completed">{{todo.title}}</span>
+                    </div>
+                    <div class="col-sm-1">
+                        <clr-checkbox [(clrChecked)]="todo.completed" (change)="changeTodoStatus(todo)">
+                        </clr-checkbox>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-link m-0" (click)="deleteTodoStatus(todo)">Delete</button>
+                    </div>
+                </div>
+            </clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>{{todos.length}} todos</clr-dg-footer>
+    </clr-datagrid>
+</div>
+
+<section class="form-block">
+    <div class="form-group">
+        <label for="validInput1" aria-haspopup="true">
+            <input type="text" id="validInput1" class="form-control" [(ngModel)]="newTodo" />
+        </label>
+        <button type="submit" class="btn btn-primary" [disabled]="!newTodo" (click)="addTodo()">Add Todo</button>
+    </div>
+</section>
